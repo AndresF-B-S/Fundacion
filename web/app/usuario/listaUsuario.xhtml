@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="title">Lista de usuarios</ui:define>
+    <ui:define name="breadcrumb">
+        <li class="breadcrumb-item active">
+            Lista de usuarios
+        </li>
+    </ui:define>
+    <ui:define name="contenidoPrincipal">
+
+        <f:view>
+            <h:form class="table">
+                <h1><h:outputText value="Lista de usuarios"/></h1>
+                
+                <h:commandLink title="Agregar usuario" class="btn btn-primary mb-2" action="#{listaUsuarioController.agregarUsuario()}">
+                    <span class="fa fa-plus"></span> Agregar usuario
+                </h:commandLink>
+                
+                <h:dataTable value="#{listaUsuarioController.listaUsuarios}" var="item">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Idusuario"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idusuario}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Nombres"/>
+                        </f:facet>
+                        <h:outputText value="#{item.nombres}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Apellidos"/>
+                        </f:facet>
+                        <h:outputText value="#{item.apellidos}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Documento"/>
+                        </f:facet>
+                        <h:outputText value="#{item.documento}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Correo"/>
+                        </f:facet>
+                        <h:outputText value="#{item.correo}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Genero"/>
+                        </f:facet>
+                        <h:panelGroup rendered="#{item.genero == 2}">
+                            <h:outputText value="Femenino"/>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{item.genero == 1}">
+                            <h:outputText value="Masculino"/>
+                        </h:panelGroup>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Estado"/>
+                        </f:facet>
+                        <h:panelGroup rendered="#{item.estado == 0}">
+                            <h:outputText value="Inactivo"/>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{item.estado == 1}">
+                            <h:outputText value="Activo"/>
+                        </h:panelGroup>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tipo Documento"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idtiposDocumento.nombre}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tipo Usuario"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idtiposUsuarios.nombre}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Opciones"/>
+                        </f:facet>
+                        <h:commandButton value="Editar" class="btn btn-info " action="#{editarUsuarioController.prepararEditar(item)}"/>
+                    </h:column>
+                    
+                    
+                    
+                </h:dataTable>
+            </h:form>
+        </f:view>
+
+
+    </ui:define>
+</ui:composition>
+

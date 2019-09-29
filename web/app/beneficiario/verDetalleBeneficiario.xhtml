@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="title">Detalle Beneficiario</ui:define>
+    <ui:define name="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="listaBeneficiarios.xhtml">Lista de beneficiarios</a>
+        </li>
+        <li class="breadcrumb-item active">
+            Detalle Beneficiario
+        </li>
+    </ui:define>
+    <ui:define name="contenidoPrincipal">
+        <div class="row">
+            <div class="col-9">
+                <h:form>
+                    <h1><h:outputText value="Detalle Beneficiario"/></h1>
+                    <h:panelGrid columns="2" class="table">
+
+                        <h:outputLabel value="Nombres: " for="nombres" />
+                        <h:outputText class="form-control form-control-sm col-5" id="nombres" value="#{verDetallesBeneficiarioController.beneficiarioSeleccionado.usuario.nombres}"/>
+
+                        <h:outputLabel value="Apellidos:" for="apellidos" />
+                        <h:outputText class="form-control form-control-sm col-5" id="apellidos" value="#{verDetallesBeneficiarioController.beneficiarioSeleccionado.usuario.apellidos}"/>
+
+                        <h:outputLabel value="Documento:" for="documento" />
+                        <h:outputText class="form-control form-control-sm col-3" id="documento" value="#{verDetallesBeneficiarioController.beneficiarioSeleccionado.usuario.documento}" />
+
+                        <h:outputLabel value="Tipo Documento:" for="idtiposDocumento" />
+                        <h:outputText class="form-control form-control-sm col-3" id="idtiposDocumento" value="#{verDetallesBeneficiarioController.beneficiarioSeleccionado.usuario.idtiposDocumento.nombre}" />
+
+
+                        <h:outputLabel value="Correo:" for="correo" />
+                        <h:outputText class="form-control form-control-sm col-3" id="correo" value="#{verDetallesBeneficiarioController.beneficiarioSeleccionado.usuario.correo}"/>
+
+                        <h:outputLabel value="Genero:" for="genero" />
+                        <h:panelGroup rendered="#{verDetallesBeneficiarioController.beneficiarioSeleccionado.usuario.genero == 2}">
+                            <h:outputText class="form-control form-control-sm col-3" value="Femenino"/>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{verDetallesBeneficiarioController.beneficiarioSeleccionado.usuario.genero == 1}">
+                            <h:outputText class="form-control form-control-sm col-3" value="Masculino"/>
+                        </h:panelGroup>
+
+                        <h:outputLabel value="Estado:" for="estado" />
+                        <h:panelGroup rendered="#{verDetallesBeneficiarioController.beneficiarioSeleccionado.usuario.estado == 0}">
+                            <h:outputText class="form-control form-control-sm col-3" value="Inactivo"/>
+                        </h:panelGroup>
+                        <h:panelGroup rendered="#{verDetallesBeneficiarioController.beneficiarioSeleccionado.usuario.estado == 1}">
+                            <h:outputText class="form-control form-control-sm col-3" value="Activo"/>
+                        </h:panelGroup>
+
+                        <h:outputLabel value="Tutor:" for="tutor" />
+                        <h:outputText class="form-control form-control-sm col-3" id="tutor" value="#{verDetallesBeneficiarioController.beneficiarioSeleccionado.tutoridTutor.idusuario.nombres} #{verDetallesBeneficiarioController.beneficiarioSeleccionado.tutoridTutor.idusuario.apellidos}" />
+
+                        <h:outputLabel value="Nivel Educativo:" for="nivelEducativo" />
+                        <h:outputText class="form-control form-control-sm col-3" id="nivelEducativo" value="#{verDetallesBeneficiarioController.beneficiarioSeleccionado.idnivelEducativo.nivelEducativo}" />
+
+
+                    </h:panelGrid>
+                    <h2><h:outputText value="Datos clinicos"/></h2>
+
+                    <h:panelGrid columns="2" class="table">
+
+                        <h:outputLabel value="Descripcion:" for="descripcion" />
+                        <h:outputText class="form-control form-control-sm col-5" id="descripcion" value="#{verDetallesBeneficiarioController.beneficiarioSeleccionado.datosClinicosId.descripcion}" />
+
+                        <h:outputLabel value="Nombre servicio salud (EPS):" for="nombreServicioSalud" />
+                        <h:outputText class="form-control form-control-sm col-3"  id="nombreServicioSalud" value="#{verDetallesBeneficiarioController.beneficiarioSeleccionado.datosClinicosId.nombreServicioSalud}" />
+
+                        <h:outputLabel value="Estado:" for="estadoSalud" />
+
+                        <h:outputText class="form-control form-control-sm col-3"  rendered="#{verDetallesBeneficiarioController.beneficiarioSeleccionado.datosClinicosId.estado == 1}" value="Tiene"/>
+
+                        <h:outputText class="form-control form-control-sm col-3"  rendered="#{verDetallesBeneficiarioController.beneficiarioSeleccionado.datosClinicosId.estado == 0}" value="No Tiene"/>
+
+                        <h:outputLabel value="Tipo Sangre" for="tipoSangre" />
+                        <h:outputText class="form-control form-control-sm col-3"  id="tipoSangre" value="#{verDetallesBeneficiarioController.beneficiarioSeleccionado.datosClinicosId.tipoSangre}" />
+
+                        <h:commandButton class="btn btn-success" value="Regresar" action="#{verDetallesBeneficiarioController.volver()}"></h:commandButton>
+
+                    </h:panelGrid>
+                </h:form>
+            </div>
+            <div class="col-3">
+                <img class="img-fluid" src="#{verDetallesBeneficiarioController.getPathImagenBeneficiario(verDetallesBeneficiarioController.beneficiarioSeleccionado.usuario)}" 
+                     alt="Imagen beneficiario #{verDetallesBeneficiarioController.beneficiarioSeleccionado.usuario.nombres} #{verDetallesBeneficiarioController.beneficiarioSeleccionado.usuario.apellidos}" />
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>
+

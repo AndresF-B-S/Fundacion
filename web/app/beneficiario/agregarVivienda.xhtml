@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="title">Agregar vivienda</ui:define>
+    <ui:define name="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="listaBeneficiarios.xhtml">Lista de beneficiarios</a>
+        </li>
+        <li class="breadcrumb-item active">
+            Agregar vivienda
+        </li>
+    </ui:define>
+    <ui:define name="contenidoPrincipal">
+
+        <h:form>
+            <h:messages showDetail="true" showSummary="true" ></h:messages>
+            <h:panelGrid columns="2" class="table">
+                <h:outputLabel value="Direccion: " for="direccion"/>
+                <h:inputText  class="form-control form-control-sm col-4" id="direccion" value="#{agregarViviendaController.vivienda.direccion}" title="Direccion" required="true" requiredMessage="El campo direccion es requerido"/>
+
+                <h:outputLabel value="Barrio: " for="barrio"/>
+                <h:inputText  class="form-control form-control-sm col-4" id="barrio" value="#{agregarViviendaController.vivienda.barrio}" title="Barrio" required="true" requiredMessage="El campo barrio es requerido"/>
+
+                <h:outputLabel value="Estado vivienda: " for="estadoVivienda"/>
+                <h:selectOneMenu class="form-control form-control-sm col-4" id="estadoVivienda" value="#{agregarViviendaController.vivienda.estadoVivienda}"> 
+                    <f:selectItem itemLabel="Propio" itemValue="1"></f:selectItem>
+                    <f:selectItem itemLabel="Arriendo" itemValue="0"></f:selectItem>   
+                </h:selectOneMenu>
+
+                <h:outputLabel value="Tipo Vivienda: " for="tipoviviendaId"/>
+                <h:selectOneMenu class="form-control form-control-sm col-4" id="tipoviviendaId" value="#{agregarViviendaController.vivienda.tipoviviendaId}" title="TipoviviendaId" converter="tipoViviendaConverter" required="true"> 
+                    <f:selectItems value="#{agregarViviendaController.listaTipoVivienda}" var="listaTipoVivienda" itemLabel="#{listaTipoVivienda.nombre}"></f:selectItems>
+                </h:selectOneMenu>
+
+                <h:outputLabel value="Material Vivienda: " for="materialviviendaId"/>
+                <h:selectOneMenu class="form-control form-control-sm col-4" id="materialviviendaId" value="#{agregarViviendaController.vivienda.materialviviendaId}" title="MaterialviviendaId" converter="materialViviendaConverter" required="true"> 
+                    <f:selectItems value="#{agregarViviendaController.listaMaterialVivienda}" var="listaMaterialVivienda" itemLabel="#{listaMaterialVivienda.nombreMaterial}"></f:selectItems>
+                </h:selectOneMenu>
+
+                <h:outputLabel value="Tipo Techo: " for="techosId"/>
+                <h:selectOneMenu class="form-control form-control-sm col-4" id="techosId" value="#{agregarViviendaController.vivienda.techosId}" title="TechosId" converter="techoConverter" required="true"> 
+                    <f:selectItems value="#{agregarViviendaController.listaTecho}" var="listaTecho" itemLabel="#{listaTecho.nombre}"></f:selectItems>
+                </h:selectOneMenu>
+
+
+            </h:panelGrid>
+
+            <h2><h:outputText value="Mas detallles"/></h2>
+
+            <h:panelGrid columns="2" class="table">
+                <h:outputLabel  value="Numero de dormitorios:" for="numerodormitorios" />
+                <h:inputText class="form-control form-control-sm col-3" id="numerodormitorios" value="#{agregarViviendaController.vivienda.numerodormitorios}" title="Numerodormitorios" />
+                <h:outputLabel value="Sala:" for="sala" />
+                <h:selectOneRadio class="col-3" id="sala" value="#{agregarViviendaController.vivienda.sala}">
+                    <f:selectItem itemLabel="Si" itemValue="1"/>
+                    <f:selectItem itemLabel="No" itemValue="0"/> 
+                </h:selectOneRadio>
+
+                <h:outputLabel value="Comedor:" for="comedor" />
+                <h:selectOneRadio class="col-3" id="comedor" value="#{agregarViviendaController.vivienda.comedor}">
+                    <f:selectItem itemLabel="Si" itemValue="1"/>
+                    <f:selectItem itemLabel="No" itemValue="0"/> 
+                </h:selectOneRadio>
+
+                <h:outputLabel value="Cocina:" for="cocina" />
+                <h:selectOneRadio class="col-3" id="cocina" value="#{agregarViviendaController.vivienda.cocina}">
+                    <f:selectItem itemLabel="Si" itemValue="1"/>
+                    <f:selectItem itemLabel="No" itemValue="0"/> 
+                </h:selectOneRadio>
+
+                <h:outputLabel value="Banioprivado:" for="banioprivado" />
+                <h:selectOneRadio class="col-3" id="banioprivado" value="#{agregarViviendaController.vivienda.banioprivado}">
+                    <f:selectItem itemLabel="Si" itemValue="1"/>
+                    <f:selectItem itemLabel="No" itemValue="0"/> 
+                </h:selectOneRadio>
+
+
+                <h:outputLabel value="Baniocolectivo:" for="baniocolectivo" />
+                <h:selectOneRadio class="col-3" id="baniocolectivo" value="#{agregarViviendaController.vivienda.baniocolectivo}">
+                    <f:selectItem itemLabel="Si" itemValue="1"/>
+                    <f:selectItem itemLabel="No" itemValue="0"/> 
+                </h:selectOneRadio>
+
+                <h:commandButton class="btn btn-primary" value="Agregar Vivienda" action="#{agregarViviendaController.agregar()}"/>
+            </h:panelGrid>
+
+
+
+        </h:form>
+
+    </ui:define>
+</ui:composition>
+

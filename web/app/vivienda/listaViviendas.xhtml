@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="title">Lista de viviendas</ui:define>
+    <ui:define name="breadcrumb">
+        <li class="breadcrumb-item active">
+            Lista de viviendas
+        </li>
+    </ui:define>
+    <ui:define name="contenidoPrincipal">
+
+        <f:view>
+
+
+            <h:form class="table">
+                <h1><h:outputText value="Lista de viviendas"/></h1>
+                <h:dataTable value="#{agregarViviendaController.listaVivienda}" var="item">
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Id"/>
+                        </f:facet>
+                        <h:outputText value="#{item.id}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Direccion"/>
+                        </f:facet>
+                        <h:outputText value="#{item.direccion}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Barrio"/>
+                        </f:facet>
+                        <h:outputText value="#{item.barrio}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="EstadoVivienda"/>
+                        </f:facet>
+                        <h:panelGroup rendered="#{item.estadoVivienda == 1}">
+                            <h:outputText value="Propio"/>  
+                        </h:panelGroup>
+
+                        <h:panelGroup rendered="#{item.estadoVivienda == 0}">
+                            <h:outputText value="Arriendo"/>         
+                        </h:panelGroup>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Beneficiario"/>
+                        </f:facet>
+                        <h:outputText value="#{item.idusuarioBeneficiario.usuario.nombres}  #{item.idusuarioBeneficiario.usuario.apellidos} "/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Material vivienda"/>
+                        </f:facet>
+                        <h:outputText value="#{item.materialviviendaId.nombreMaterial}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Techo"/>
+                        </f:facet>
+                        <h:outputText value="#{item.techosId.nombre}"/>
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Tipo vivienda"/>
+                        </f:facet>
+                        <h:outputText value="#{item.tipoviviendaId.nombre}"/>
+                    </h:column>
+                    <h:column>
+                        
+                        <f:facet name="header">
+                            <h:outputText value="Distribucion vivienda"/>
+                        </f:facet>
+                        
+                        <h:outputText value="#{agregarViviendaController.obtenerDistribucionVivienda(item)}" escape="false"/>
+                        
+                    </h:column>
+                    
+                    <h:column>
+                        <f:facet name="header">
+                            <h:outputText value="Opciones"/>
+                        </f:facet>
+                        
+                        <a>
+                            <h:commandButton value="Editar" class="btn btn-success "  action="#{editarViviendaController.prepararEditar(item)}"/>
+                        </a>     
+
+
+                    </h:column>
+                </h:dataTable>
+            </h:form>
+        </f:view>
+
+    </ui:define>
+
+</ui:composition>
+

@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:h="http://xmlns.jcp.org/jsf/html"
+             xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <a class="navbar-brand" href="#">Fundacion</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Avatar" style="padding: 10px;">
+                <img class="img-fluid" src="#{controladorInicioSesion.obtenerRutaFoto()}" alt="Avatar" style="border-radius: 50%;" />
+            </li>
+            <h:panelGroup rendered="#{not empty controladorInicioSesion.usuario}">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Nombre usuario">
+                    <a class="nav-link" href="#">
+                        <!--                        <i class="fa fa-fw fa-user-circle"></i>-->
+                        <strong><h:outputText  value="#{controladorInicioSesion.usuario.nombres.toCharArray()[0]}#{controladorInicioSesion.usuario.apellidos.toCharArray()[0]}" /></strong>
+                        <span class="nav-link-text"><h:outputText  value="#{controladorInicioSesion.usuario.nombres} #{controladorInicioSesion.usuario.apellidos}" /></span>
+                    </a>
+                </li>
+            </h:panelGroup>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Usuarios">
+                <a class="nav-link" href="#{request.contextPath}/app/usuario/listaUsuario.xhtml">
+                    <i class="fa fa-fw fa-user"></i>
+                    <span class="nav-link-text">Usuarios</span>
+                </a>
+            </li>
+
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Beneficiarios">
+                <a class="nav-link" href="#{request.contextPath}/app/beneficiario/listaBeneficiarios.xhtml">
+                    <i class="fa fa-fw fa-users"></i>
+                    <span class="nav-link-text">Beneficiarios</span>
+                </a>
+            </li>
+
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+                <a class="nav-link" href="#{request.contextPath}/app/vivienda/listaViviendas.xhtml">
+                    <i class="fa fa-fw fa-home"></i>
+                    <span class="nav-link-text">Viviendas</span>
+                </a>
+            </li>
+
+        </ul>
+        <ul class="navbar-nav sidenav-toggler">
+            <li class="nav-item">
+                <a class="nav-link text-center" id="sidenavToggler">
+                    <i class="fa fa-fw fa-angle-left"></i>
+                </a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                    <i class="fa fa-fw fa-sign-out"></i>Cerrar sesion</a>
+            </li>
+        </ul>
+    </div>
+</ui:fragment>
+

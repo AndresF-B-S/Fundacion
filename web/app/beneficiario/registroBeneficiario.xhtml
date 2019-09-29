@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:define name="title">Registrar beneficiario</ui:define>
+    <ui:define name="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="listaBeneficiarios.xhtml">Lista de beneficiarios</a>
+        </li>
+        <li class="breadcrumb-item active">
+            Registrar beneficiario
+        </li>
+    </ui:define>
+    <ui:define name="contenidoPrincipal">
+
+        <h:form enctype="multipart/form-data">
+            <h:messages showDetail="true" showSummary="true"></h:messages>
+            <h1><h:outputText value="Registrar beneficiario"/></h1>
+
+            <h:panelGrid columns="2" class="table" > 
+
+                <h:outputLabel value="Nombres: " for="nombres" />
+                <h:inputText class="form-control form-control-sm col-5" id="nombres" value="#{registroBeneficiarioController.usuario.nombres}" title="Nombres" required="true" requiredMessage="El campo es requerido"/>
+
+                <h:outputLabel value="Apellidos:" for="apellidos" />
+                <h:inputText class="form-control form-control-sm col-5" id="apellidos" value="#{registroBeneficiarioController.usuario.apellidos}" title="Apellidos" required="true" requiredMessage="El campo es requerido"/>
+
+                <h:outputLabel value="Documento:" for="documento" />
+                <h:inputText class="form-control form-control-sm col-3" id="documento" value="#{registroBeneficiarioController.usuario.documento}" title="Documento" required="true" requiredMessage="Por favor digita el documento"/>
+
+                <h:outputLabel value="Tipo Documento:" for="idtiposDocumento" />
+                <h:selectOneMenu class="form-control form-control-sm col-3" id="idtiposDocumento" value="#{registroBeneficiarioController.usuario.idtiposDocumento}" title="IdtiposDocumento" converter="tipoDocumentoConverter" required="true" requiredMessage="Campo obligatorio">
+                    <f:selectItems value="#{registrarUsuarioController.listaTipoDocumento}" var="listaTipoDocumento" itemLabel="#{listaTipoDocumento.nombre}"/>
+                </h:selectOneMenu>
+
+                <h:outputLabel value="Correo:" for="correo" />
+                <h:inputText class="form-control form-control-sm col-3" id="correo" value="#{registroBeneficiarioController.usuario.correo}" title="Correo" required="true" requiredMessage="El campo es requerido"/>
+
+                <h:outputLabel value="Genero:" for="genero" />
+                <h:selectOneRadio class="col-3" id="genero" value="#{registroBeneficiarioController.usuario.genero}" title="Genero">
+                    <f:selectItem itemLabel="Femenino" itemValue="2" />
+                    <f:selectItem itemLabel="Masculino" itemValue="1" />
+                </h:selectOneRadio>
+
+                <h:outputLabel value="Estado:" for="estado" />
+                <h:selectOneRadio class="col-3" id="estado" value="#{registroBeneficiarioController.usuario.estado}" title="Estado">
+                    <f:selectItem itemLabel="Activo" itemValue="1" />
+                    <f:selectItem itemLabel="Inactivo" itemValue="0" />
+                </h:selectOneRadio>
+
+                <h:outputLabel value="Tutor:" for="tutor" />
+                <h:selectOneMenu class="form-control form-control-sm col-3" id="tutor" value="#{registroBeneficiarioController.beneficiario.tutoridTutor}" title="IdTutor" converter="tutorConverter" required="true" requiredMessage="Campo obligatorio">
+                    <f:selectItems value="#{registroBeneficiarioController.listaTurores}" var="listaTutores" itemLabel="#{listaTutores.idusuario.nombres} #{listaTutores.idusuario.apellidos}"/>
+                </h:selectOneMenu>
+
+                <h:outputLabel value="Nivel Educativo:" for="nivelEducativo" />
+                <h:selectOneMenu class="form-control form-control-sm col-3" id="nivelEducativo" value="#{registroBeneficiarioController.beneficiario.idnivelEducativo}" title="IdtiposUsuarios" converter="nivelEducativoConverter" required="true" requiredMessage="Campo obligatorio">
+                    <f:selectItems value="#{registroBeneficiarioController.listaNivelEducativo}" var="listaNivelEducativo" itemLabel="#{listaNivelEducativo.nivelEducativo}"/>
+                </h:selectOneMenu>
+
+                <h:outputLabel value="Foto:" for="foto" />
+                <h:inputFile id="foto" class="form-control form-control-sm col-3" title="Foto" required="true" requiredMessage="Debe subir una foto del beneficiario" value="#{registroBeneficiarioController.imagenBeneficiario}" a:accept="image/*" />
+            </h:panelGrid>
+            <h2><h:outputText value="Datos clinicos"/></h2>
+
+            <h:panelGrid columns="2" class="table">
+
+                <h:outputLabel value="Descripcion:" for="descripcion" />
+                <h:inputText class="form-control form-control-sm col-5" id="descripcion" value="#{registroBeneficiarioController.datoClinico.descripcion}" title="Descripcion" />
+
+                <h:outputLabel value="Nombre servicio salud (EPS):" for="nombreServicioSalud" />
+                <h:inputText class="form-control form-control-sm col-3"  id="nombreServicioSalud" value="#{registroBeneficiarioController.datoClinico.nombreServicioSalud}" title="Descripcion" />
+
+                <h:outputLabel value="Estado:" for="estadoSalud" />
+                <h:selectOneRadio class="col-3" id="estadoSalud" value="#{registroBeneficiarioController.datoClinico.estado}">
+                    <f:selectItem  itemLabel="Tiene" itemValue="1"></f:selectItem>
+                    <f:selectItem itemLabel="No tiene" itemValue="0"></f:selectItem>
+                </h:selectOneRadio>
+
+                <h:outputLabel value="Tipo Sangre" for="tipoSangre" />
+                <h:selectOneMenu class="form-control form-control-sm col-3"  id="tipoSangre" value="#{registroBeneficiarioController.datoClinico.tipoSangre}" title="TipoSangre">
+                    <f:selectItem itemLabel="O+" itemValue="O+" />
+                    <f:selectItem itemLabel="O-" itemValue="O-" />
+                    <f:selectItem itemLabel="A+" itemValue="A+" />
+                    <f:selectItem itemLabel="A-" itemValue="A-" />
+                    <f:selectItem itemLabel="B+" itemValue="B+" />
+                    <f:selectItem itemLabel="B-" itemValue="B-" />
+                    <f:selectItem itemLabel="AB+" itemValue="AB+" />
+                    <f:selectItem itemLabel="AB-" itemValue="AB-" />
+                </h:selectOneMenu>
+
+            </h:panelGrid>
+
+            <h:commandButton class="btn btn-primary" value="Registrar" action="#{registroBeneficiarioController.registrarBeneficiario()}"></h:commandButton>
+
+        </h:form>
+
+    </ui:define>
+</ui:composition>
+

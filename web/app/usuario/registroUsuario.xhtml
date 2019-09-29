@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition  template="/WEB-INF/template/template.xhtml"
+                 xmlns="http://www.w3.org/1999/xhtml"
+                 xmlns:h="http://xmlns.jcp.org/jsf/html"
+                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                 xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="title">Registrar Usuario</ui:define>
+    <ui:define name="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="listaUsuario.xhtml">Lista de usuarios</a>
+        </li>
+        <li class="breadcrumb-item active">
+            Registrar Usuario
+        </li>
+    </ui:define>
+    <ui:define name="contenidoPrincipal">
+        <f:view>
+            <h:form>
+                <h1><h:outputText value="Registrar Usuario"/></h1>
+                <h:panelGrid columns="3" class="table">
+                    
+                    <h:outputLabel value="Nombres: " for="nombres" />
+                    <h:inputText class="form-control form-control-sm col-5" id="nombres" value="#{registrarUsuarioController.usuario.nombres}" title="Nombres" required="true" requiredMessage="El nombre es requerido"/>
+                    <h:message for="nombres" style="color: red;" />
+                    
+                    <h:outputLabel value="Apellidos:" for="apellidos" />
+                    <h:inputText class="form-control form-control-sm col-5" id="apellidos" value="#{registrarUsuarioController.usuario.apellidos}" title="Apellidos" required="true" requiredMessage="El apellido es requerido"/>
+                    <h:message for="apellidos" style="color: red;" />
+                    
+                    <h:outputLabel value="Documento:" for="documento" />
+                    <h:inputText class="form-control form-control-sm col-3" id="documento" value="#{registrarUsuarioController.usuario.documento}" title="Documento" required="true" requiredMessage="Por favor digita el documento"/>
+                    <h:message for="documento" style="color: red;" />
+                    
+                    <h:outputLabel value="Tipo Documento:" for="idtiposDocumento" />
+                    <h:selectOneMenu class="form-control form-control-sm col-3" id="idtiposDocumento" value="#{registrarUsuarioController.usuario.idtiposDocumento}" title="IdtiposDocumento" converter="tipoDocumentoConverter" required="true" requiredMessage="El tipo de documento es obligatorio">
+                        <f:selectItem itemLabel="Seleccione" itemValue="" />
+                        <f:selectItems value="#{registrarUsuarioController.listaTipoDocumento}" var="listaTipoDocumento" itemLabel="#{listaTipoDocumento.nombre}"/>
+                    </h:selectOneMenu>
+                    <h:message for="idtiposDocumento" style="color: red;" />
+                    
+                    <h:outputLabel value="Correo:" for="correo" />
+                    <h:inputText class="form-control form-control-sm col-3" id="correo" value="#{registrarUsuarioController.usuario.correo}" title="Correo" required="true" requiredMessage="El correo es requerido"/>
+                    <h:message for="correo" style="color: red;" />
+                    
+                    <h:outputLabel value="Clave:" for="clave" />
+                    <h:inputSecret class="form-control form-control-sm col-3" id="clave" value="#{registrarUsuarioController.usuario.clave}" title="Clave" required="true" requiredMessage="El clave es requerido"/>
+                    <h:message for="clave" style="color: red;" />
+                    
+                    <h:outputLabel value="Genero:" for="genero" />
+                    <h:selectOneRadio class="col-3" id="genero" value="#{registrarUsuarioController.usuario.genero}" title="Genero" requiredMessage="El genero es requerido">
+                        <f:selectItem itemLabel="Femenino" itemValue="2" />
+                        <f:selectItem itemLabel="Masculino" itemValue="1" />
+                    </h:selectOneRadio>
+                    <h:message for="genero" style="color: red;" />
+                    
+                    <h:outputLabel value="Estado:" for="estado" />
+                    <h:selectOneRadio class="col-3" id="estado" value="#{registrarUsuarioController.usuario.estado}" title="Estado">
+                        <f:selectItem itemLabel="Activo" itemValue="1" />
+                        <f:selectItem itemLabel="Inactivo" itemValue="0" />
+                    </h:selectOneRadio>
+                    <h:message for="estado" style="color: red;" />
+                    
+                    <h:outputLabel value="Tipo Usuario:" for="idtiposUsuarios" />
+                    <h:selectOneMenu class="form-control form-control-sm col-3" id="idtiposUsuarios" value="#{registrarUsuarioController.usuario.idtiposUsuarios}" title="IdtiposUsuarios" converter="tipoUsuarioConverter" required="true" requiredMessage="Campo obligatorio">
+                        <f:selectItems value="#{registrarUsuarioController.listaTipoUsuario}" var="listaTipoUsuario" itemLabel="#{listaTipoUsuario.nombre}"/>
+                    </h:selectOneMenu>
+                    <h:message for="idtiposUsuarios" style="color: red;" />
+                    
+                    <h:commandButton class="btn btn-primary"  value="Registrar" action="#{registrarUsuarioController.createUser()}"></h:commandButton>
+                    
+                </h:panelGrid>
+            </h:form>
+        </f:view>
+
+        
+    </ui:define>
+
+</ui:composition>
+

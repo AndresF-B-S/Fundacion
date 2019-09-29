@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+        
+    <head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>Iglesia Fe de Vida</title>
+    <link href="https://fonts.googleapis.com/css?family=Fjalla+One|Source+Sans+Pro" rel="stylesheet"/>
+    <link rel="stylesheet" href="#{request.contextPath}/resources/css/estilos.css"/>
+</head>
+
+<body>
+    <header class="header">
+
+        <div class="container">
+            <figure class="logo">
+            <img src="#{request.contextPath}/resources/images/logo.png" height="90" alt="logo de Iglesia fe de vida" />
+            </figure>
+            <nav class="menu">
+                <ol>
+                    <li>
+                        <a class="link" href="#nosotros">Nosotros</a>
+                    </li>
+                    <li>
+                        <a class="link" href="#contacto">Apoyo</a>
+                    </li>
+                    <li>
+                        <a class="link" href="login.xhtml">Iniciar Sesion</a>
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </header>
+    <section class="hero">
+        <div class="container">
+            <h1>
+                Hola, somos <strong>Fe de vida!</strong> <br/> comunidad <strong> cristiana </strong> con <br/> pasion por
+                la <strong>labor social</strong>
+            </h1>
+        </div>
+        <img class="hero-image" src="#{request.contextPath}/resources/images/hero.jpg" width="500" height="300" alt="imagen principal del sitio" />
+    </section>
+
+    <section class="presentation">
+        <div class="container">
+            <h2>Nosotros</h2>
+            <article class="nosotros">
+                <div class="nosotros-details">
+                    <h3 class="nosotros-title">Mision</h3>
+                    <p class="nosotros-description">Ganar almas para Cristo con el arma del amor, pastorearlas,
+                        sanarlas, capacitarlas, equiparlas
+                        y enviarlas a reflejar a Cristo en sus vidas; Tomando el ejemplo practico de la iglesia
+                        primitiva, con sus bases, sus enseñanzas,
+                        experiencias y misión</p>
+                </div>
+                <figure class="nosotros-imagecontainer">
+                    <img class="nosotros-image" width="500" src="#{request.contextPath}/resources/images/mision.jpg" alt="mision"/>
+                </figure>
+            </article>
+
+            <article class="nosotros">
+                <div class="nosotros-details">
+                    <h3 class="nosotros-title"> Vision</h3>
+                    <p class="nosotros-description">
+                        Vemos una Iglesia:<br/>
+                        - Conocida en el mundo entero por su buena formación de lideres (Siervos), pastores, maestros,
+                        misioneros y adoradores.<br/>
+                        - Con sana doctrina apostolica innegociable.<br/>
+                        - Con miles de personas conforme al corazon de Dios y que se a notorio el caracter de Cristo en
+                        sus vidas.<br/>
+                        - Con miles de personas Restauradas y libres de sus quebrantos y ataduras.<br/>
+                        - Con un crecimiento integral en cada hermano, que prospere en todas las áreas.<br/>
+                        - Muy familiar y de mucho Gozo<br/>
+                        - Muchas iglesias Hijas bien Fundamentadas.<br/>
+                    </p>
+                </div>
+                <figure class="nosotros-imagecontainer">
+                    <img class="nosotros-image" width="500" src="#{request.contextPath}/resources/images/vision.jpg" alt="vision"/>
+                </figure>
+            </article>
+
+            <article class="nosotros">
+                <div class="nosotros-details">
+                    <h3 class="nosotros-title">Valores Institucionales</h3>
+                    <p class="nosotros-description">
+                        - Lealtad<br/>
+                        - Sujeción<br/>
+                        - Integridad<br/>
+                        - Servicio<br/>
+                    </p>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section class="contact">
+        <div class="container">
+            <h:form class="form-email" prependId="false">
+                <h3>¿Deseas apoyarnos?</h3>
+                <h:inputText a:placeholder="Tus nombres" value="#{correoController.nombres}" id="nombres"/>
+                <h:inputText  a:placeholder="Tus apellidos" value="#{correoController.apellidos}" id="apellidos"/>
+                <h:inputText a:type="email" a:placeholder="Dejanos tu email" value="#{correoController.email}" id="email"/>
+                <h:selectOneRadio id="tipoSolicitud" value="#{correoController.tipoSolicitud}">
+                    <f:selectItem itemLabel="Información" itemValue="informacion"></f:selectItem>
+                    <f:selectItem itemLabel="Donación" itemValue="donacion"></f:selectItem>
+                </h:selectOneRadio>
+                <h:inputTextarea  a:placeholder="Dejanos tu mensaje" value="#{correoController.mensaje}" id="mensaje"/> <br/> 
+                <h:commandButton value="Enviar" action="#{correoController.enviarCorreos()}" />
+            </h:form>
+            <div class="social">
+                <a href="https://twitter.com/AndresF_B_S" class="social-link twitter"></a>
+                <a href="https://facebook.com/nuevavidaaiecbogota" class="social-link facebook"></a>
+                <a href="https://instagram.com/andres_f.b.s" class="social-link instagram"></a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div>
+                <p>Iglesia Nueva vida 2019 <img src="#{request.contextPath}/resources/images/pray.png" width="80" alt="nueva vida"/> </p>
+            </div>
+
+            <div>
+                <p>Diseñado con  <a href="https://twitter.com/AndresF_B_S">@AndresF_B_S</a> </p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
+
+
