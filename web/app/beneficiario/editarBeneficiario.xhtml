@@ -4,7 +4,9 @@
                 xmlns="http://www.w3.org/1999/xhtml"
                 xmlns:h="http://xmlns.jcp.org/jsf/html"
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <ui:define name="title">Editar beneficiario</ui:define>
     <ui:define name="breadcrumb">
         <li class="breadcrumb-item">
@@ -15,10 +17,10 @@
         </li>
     </ui:define>
     <ui:define name="contenidoPrincipal">
-        
+
         <h:form>
             <h:messages showDetail="true" showSummary="true"></h:messages>
-            <h1><h:outputText value="Registrar beneficiario"/></h1>
+            <h1><h:outputText value="Editar beneficiario"/></h1>
 
             <h:panelGrid columns="2" class="table" > 
 
@@ -50,11 +52,11 @@
                     <f:selectItem itemLabel="Activo" itemValue="1" />
                     <f:selectItem itemLabel="Inactivo" itemValue="0" />
                 </h:selectOneRadio>
-                
-                 <h:outputLabel value="Tutor:" for="tutor" />
-                 <h:selectOneMenu class="form-control form-control-sm col-3" id="tutor" value="#{editarBeneficiarioController.beneficiarioSeleccionado.tutoridTutor}" title="IdTutor" converter="tutorConverter" required="true" requiredMessage="Campo obligatorio">
 
-                     <f:selectItems value="#{editarBeneficiarioController.listaTutor}" var="listaTutores" itemLabel="#{listaTutores.idusuario.nombres} #{listaTutores.idusuario.apellidos}"/>
+                <h:outputLabel value="Tutor:" for="tutor" />
+                <h:selectOneMenu class="form-control form-control-sm col-3" id="tutor" value="#{editarBeneficiarioController.beneficiarioSeleccionado.tutoridTutor}" title="IdTutor" converter="tutorConverter" required="true" requiredMessage="Campo obligatorio">
+
+                    <f:selectItems value="#{editarBeneficiarioController.listaTutor}" var="listaTutores" itemLabel="#{listaTutores.idusuario.nombres} #{listaTutores.idusuario.apellidos}"/>
                 </h:selectOneMenu>
 
                 <h:outputLabel value="Nivel Educativo:" for="nivelEducativo" />
@@ -79,7 +81,7 @@
                     <f:selectItem  itemLabel="Tiene" itemValue="1"></f:selectItem>
                     <f:selectItem itemLabel="No tiene" itemValue="0"></f:selectItem>
                 </h:selectOneRadio> 
-                
+
                 <h:outputLabel value="Tipo Sangre" for="tipoSangre" />
                 <h:selectOneMenu class="form-control form-control-sm col-3"  id="tipoSangre" value="#{editarBeneficiarioController.beneficiarioSeleccionado.datosClinicosId.tipoSangre}" title="TipoSangre">
                     <f:selectItem itemLabel="O+" itemValue="O+" />
@@ -98,7 +100,25 @@
 
         </h:form>
 
-        
+        <h:form prependId="false" enctype="multipart/form-data">
+            <h2><h:outputText value="Editar foto" /></h2>
+
+            <div class="form-row">
+                <div class="col-md-4 col-6">
+                    <img src="#{editarBeneficiarioController.obtenerRutaFoto()}" alt="Imagen beneficiario" class="img-fluid" />
+                </div>
+                <div class="col-md-8 col-6">
+                    <div class="form-group">
+                        <h:outputLabel value="Foto:" for="foto" />
+                        <h:inputFile id="foto" class="form-control form-control-sm" title="Foto" required="true" requiredMessage="Debe subir una foto del beneficiario" value="#{editarBeneficiarioController.imagenBeneficiario}" a:accept="image/*" />
+                        <h:message for="foto" style="color: red;" />
+                    </div>
+
+                    <h:commandButton class="btn btn-primary"  value="Editar imagen" action="#{editarBeneficiarioController.cambiarImagen()}"></h:commandButton>
+                </div>
+            </div>
+        </h:form>
+
     </ui:define>
 </ui:composition>
 

@@ -1,5 +1,6 @@
 package fundacion.controladores.usuarios;
 
+import fundacion.contralodores.script.ScriptController;
 import fundacion.modelo.dao.TipoDocumentoFacade;
 import fundacion.modelo.dao.TipoUsuarioFacade;
 import fundacion.modelo.dao.TutorFacade;
@@ -8,16 +9,20 @@ import fundacion.modelo.entidades.TipoDocumento;
 import fundacion.modelo.entidades.TipoUsuario;
 import fundacion.modelo.entidades.Tutor;
 import fundacion.modelo.entidades.Usuario;
+import fundacion.utils.ArchivoUtils;
+import fundacion.utils.MessageUtil;
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -45,8 +50,12 @@ public class RegistrarUsuarioController implements Serializable {
     @EJB
     private TutorFacade tutorFacade;
     
+    @Inject
+    private ScriptController script;
+    
     private Tutor tutor;
     
+    private Part imagenUsuario;
     
     public RegistrarUsuarioController()  {
     }
@@ -65,7 +74,15 @@ public class RegistrarUsuarioController implements Serializable {
         
     }
     
-    public String createUser(){
+    public String createUser() throws IOException{
+        
+        String ruta = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/").replace("build" + File.separator, "");
+        String extension = ArchivoUtils.obtenerExtensionImagen(imagenUsuario.getSubmittedFileName());
+        String nombreArchivo = ArchivoUtils.crearNombreDeArchivoUsuario(usuario, extension);
+        ruta = ruta + "resources" + File.separator + "images" + File.separator + "usuario" + File.separator + nombreArchivo;
+
+        usuario.setRutaFoto(nombreArchivo);
+        ArchivoUtils.guardarFoto(imagenUsuario, ruta);
         
         usuarioFacade.create(usuario);
         
@@ -77,7 +94,7 @@ public class RegistrarUsuarioController implements Serializable {
             tutorFacade.create(tutor);
         }
         
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Usuario creado con exito "));
+        script.setScript(MessageUtil.ShowSuccessMessage("Usuario creado con exito"));
         
         return "listaUsuario.xhtml?faces-redirect=true";
     
@@ -105,6 +122,14 @@ public class RegistrarUsuarioController implements Serializable {
 
     public void setListaTipoUsuario(List<TipoUsuario> listaTipoUsuario) {
         this.listaTipoUsuario = listaTipoUsuario;
+    }
+
+    public Part getImagenUsuario() {
+        return imagenUsuario;
+    }
+
+    public void setImagenUsuario(Part imagenUsuario) {
+        this.imagenUsuario = imagenUsuario;
     }
     
     

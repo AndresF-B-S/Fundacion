@@ -5,6 +5,7 @@ import fundacion.modelo.dao.UsuarioFacade;
 import fundacion.modelo.entidades.Usuario;
 import fundacion.utils.ArchivoUtils;
 import fundacion.utils.MessageUtil;
+import java.io.File;
 import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
@@ -12,10 +13,10 @@ import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -33,6 +34,8 @@ public class ControladorInicioSesion implements Serializable {
     private int documento;
 
     private String clave;
+    
+    private Part imagenUsuario;
     
     @Inject
     
@@ -110,10 +113,34 @@ public class ControladorInicioSesion implements Serializable {
     public void setClave(String clave) {
         this.clave = clave;
     }
+
+    public Part getImagenUsuario() {
+        return imagenUsuario;
+    }
+
+    public void setImagenUsuario(Part imagenUsuario) {
+        this.imagenUsuario = imagenUsuario;
+    }
     
     public String obtenerRutaFoto() {
         if (usuario == null) usuario = new Usuario();
         return ArchivoUtils.obtenerRutaFoto(usuario);
+    }
+    
+    public String cambiarFoto() throws IOException {
+        String ruta = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/").replace("build" + File.separator, "");
+        String extension = ArchivoUtils.obtenerExtensionImagen(imagenUsuario.getSubmittedFileName());
+        String nombreArchivo = ArchivoUtils.crearNombreDeArchivoUsuario(usuario, extension);
+        ruta = ruta + "resources" + File.separator + "images" + File.separator + "usuario" + File.separator + nombreArchivo;
+
+        usuario.setRutaFoto(nombreArchivo);
+        ArchivoUtils.guardarFoto(imagenUsuario, ruta);
+        
+        usuarioFacade.edit(usuario);
+        
+        script.setScript(MessageUtil.ShowSuccessMessage("Foto del usuario editada con exito"));
+        
+        return "cambiarFoto.xhtml?faces-redirect=true";
     }
 
 }

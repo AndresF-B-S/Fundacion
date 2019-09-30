@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/template/template.xhtml"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:define name="title">Cambiar foto</ui:define>
+    <ui:define name="breadcrumb">
+        <li class="breadcrumb-item active">
+            Cambiar foto
+        </li>
+    </ui:define>
+    <ui:define name="contenidoPrincipal">
+        <h:form prependId="false" enctype="multipart/form-data">
+            <div class="form-group">
+                <h:outputLabel value="Foto:" for="foto" />
+                <h:inputFile id="foto" class="form-control form-control-sm" title="Foto" required="true" requiredMessage="Debe subir una foto" value="#{controladorInicioSesion.imagenUsuario}" a:accept="image/*" />
+                <h:message for="foto" style="color: red;" />
+            </div>
+
+            <h:commandButton class="btn btn-primary"  value="Cambiar foto" action="#{controladorInicioSesion.cambiarFoto()}"></h:commandButton>
+        </h:form>
+    </ui:define>
+</ui:composition>
+
