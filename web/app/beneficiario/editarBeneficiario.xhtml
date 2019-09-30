@@ -111,6 +111,7 @@
                     <div class="form-group">
                         <h:outputLabel value="Foto:" for="foto" />
                         <h:inputFile id="foto" class="form-control form-control-sm" title="Foto" required="true" requiredMessage="Debe subir una foto del beneficiario" value="#{editarBeneficiarioController.imagenBeneficiario}" a:accept="image/*" />
+                        <h:message for="foto" style="color: red;" />
                     </div>
 
                     <h:commandButton class="btn btn-primary"  value="Editar imagen" action="#{editarBeneficiarioController.cambiarImagen()}"></h:commandButton>

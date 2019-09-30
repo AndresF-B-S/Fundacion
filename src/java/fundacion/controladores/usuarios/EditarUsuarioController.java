@@ -5,12 +5,17 @@
  */
 package fundacion.controladores.usuarios;
 
+import fundacion.contralodores.script.ScriptController;
 import fundacion.modelo.dao.TipoDocumentoFacade;
 import fundacion.modelo.dao.TipoUsuarioFacade;
 import fundacion.modelo.dao.UsuarioFacade;
 import fundacion.modelo.entidades.TipoDocumento;
 import fundacion.modelo.entidades.TipoUsuario;
 import fundacion.modelo.entidades.Usuario;
+import fundacion.utils.ArchivoUtils;
+import fundacion.utils.MessageUtil;
+import java.io.File;
+import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.ConversationScoped;
 import java.io.Serializable;
@@ -18,7 +23,9 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -46,6 +53,10 @@ public class EditarUsuarioController implements Serializable {
     @Inject
     private Conversation conversacion;
     
+    @Inject
+    private ScriptController script;
+    
+    private Part imagenUsuario;
 
     public EditarUsuarioController() {
         
@@ -76,7 +87,7 @@ public class EditarUsuarioController implements Serializable {
     
     public String cancelar(){
         terminarConversacion();
-        return "userList.xhtml";
+        return "listaUsuario.xhtml";
     
     }
     
@@ -91,6 +102,22 @@ public class EditarUsuarioController implements Serializable {
         usuarioFacade.edit(usuarioEditable);
         return cancelar();
     
+    }
+    
+    public String editarFoto() throws IOException {
+        String ruta = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/").replace("build" + File.separator, "");
+        String extension = ArchivoUtils.obtenerExtensionImagen(imagenUsuario.getSubmittedFileName());
+        String nombreArchivo = ArchivoUtils.crearNombreDeArchivoUsuario(usuarioEditable, extension);
+        ruta = ruta + "resources" + File.separator + "images" + File.separator + "usuario" + File.separator + nombreArchivo;
+
+        usuarioEditable.setRutaFoto(nombreArchivo);
+        ArchivoUtils.guardarFoto(imagenUsuario, ruta);
+        
+        usuarioFacade.edit(usuarioEditable);
+        
+        script.setScript(MessageUtil.ShowSuccessMessage("Foto del usuario editada con exito"));
+        
+        return cancelar();
     }
 
     public Usuario getUsuarioEditable() {
@@ -108,6 +135,16 @@ public class EditarUsuarioController implements Serializable {
     public List<TipoUsuario> getListaTipoUsuario() {
         return listaTipoUsuario;
     }
+
+    public Part getImagenUsuario() {
+        return imagenUsuario;
+    }
+
+    public void setImagenUsuario(Part imagenUsuario) {
+        this.imagenUsuario = imagenUsuario;
+    }
     
-    
+    public String obtenerRutaFoto() {
+        return ArchivoUtils.obtenerRutaFoto(usuarioEditable);
+    }
 }
