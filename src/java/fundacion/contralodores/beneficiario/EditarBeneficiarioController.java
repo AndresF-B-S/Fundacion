@@ -11,7 +11,10 @@ import fundacion.modelo.entidades.DatoClinico;
 import fundacion.modelo.entidades.NivelEducativo;
 import fundacion.modelo.entidades.Tutor;
 import fundacion.modelo.entidades.Usuario;
+import fundacion.utils.ArchivoUtils;
 import fundacion.utils.MessageUtil;
+import java.io.File;
+import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.ConversationScoped;
 import java.io.Serializable;
@@ -19,7 +22,9 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
+import javax.faces.context.FacesContext;
 import javax.inject.Inject;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -57,9 +62,11 @@ public class EditarBeneficiarioController implements Serializable {
 
     @Inject
     Conversation conversacion;
-    
+
     @Inject
     private ScriptController script;
+
+    private Part imagenBeneficiario;
 
     public EditarBeneficiarioController() {
     }
@@ -85,23 +92,41 @@ public class EditarBeneficiarioController implements Serializable {
         }
 
     }
-    
-    public String cancelar(){
-        terminarConversacion();        
+
+    public String cancelar() {
+        terminarConversacion();
         return "listaBeneficiarios.xhtml?faces-redirect=true";
-    
+
     }
-    
-    public String prepararEditar(Beneficiario beneficiario){
+
+    public String prepararEditar(Beneficiario beneficiario) {
         iniciarConvesacion();
         this.beneficiarioSeleccionado = beneficiario;
-        return"editarBeneficiario.xhtml?faces-redirect=true";
-    
+        return "editarBeneficiario.xhtml?faces-redirect=true";
+
     }
-    
-    public String editar(){
+
+    public String editar() {
         beneficiarioFacade.edit(beneficiarioSeleccionado);
         script.setScript(MessageUtil.ShowSuccessMessage("Beneficiario editado con exito"));
+        return cancelar();
+    }
+
+    public String cambiarImagen() throws IOException {
+        Usuario usuarioAsociado = beneficiarioSeleccionado.getUsuario();
+        
+        String ruta = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/").replace("build" + File.separator, "");
+        String extension = ArchivoUtils.obtenerExtensionImagen(imagenBeneficiario.getSubmittedFileName());
+        String nombreArchivo = ArchivoUtils.crearNombreDeArchivoUsuario(usuarioAsociado, extension);
+        ruta = ruta + "resources" + File.separator + "images" + File.separator + "usuario" + File.separator + nombreArchivo;
+
+        usuarioAsociado.setRutaFoto(nombreArchivo);
+        ArchivoUtils.guardarFoto(imagenBeneficiario, ruta);
+
+        usuarioFacade.edit(usuarioAsociado);
+        
+        script.setScript(MessageUtil.ShowSuccessMessage("Foto del beneficiario editada con exito"));
+
         return cancelar();
     }
 
@@ -120,7 +145,18 @@ public class EditarBeneficiarioController implements Serializable {
     public List<Tutor> getListaTutor() {
         return listaTutores;
     }
-    
-    
+
+    public Part getImagenBeneficiario() {
+        return imagenBeneficiario;
+    }
+
+    public void setImagenBeneficiario(Part imagenBeneficiario) {
+        this.imagenBeneficiario = imagenBeneficiario;
+    }
+
+    public String obtenerRutaFoto() {
+        Usuario usuarioAsociado = beneficiarioSeleccionado.getUsuario();
+        return ArchivoUtils.obtenerRutaFoto(usuarioAsociado);
+    }
 
 }
