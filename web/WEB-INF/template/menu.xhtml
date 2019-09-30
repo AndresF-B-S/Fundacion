@@ -14,11 +14,17 @@
                 <img class="img-fluid" src="#{controladorInicioSesion.obtenerRutaFoto()}" alt="Avatar" style="border-radius: 50%;" />
             </li>
             <h:panelGroup rendered="#{not empty controladorInicioSesion.usuario}">
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Nombre usuario">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="#{controladorInicioSesion.usuario.nombres} #{controladorInicioSesion.usuario.apellidos}">
                     <a class="nav-link" href="#">
                         <!--                        <i class="fa fa-fw fa-user-circle"></i>-->
                         <strong><h:outputText  value="#{controladorInicioSesion.usuario.nombres.toCharArray()[0]}#{controladorInicioSesion.usuario.apellidos.toCharArray()[0]}" /></strong>
                         <span class="nav-link-text"><h:outputText  value="#{controladorInicioSesion.usuario.nombres} #{controladorInicioSesion.usuario.apellidos}" /></span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Nombre usuario">
+                    <a class="nav-link" href="#{request.contextPath}/app/cambiarFoto.xhtml">
+                        <i class="fa fa-fw fa-photo"></i>
+                        <span class="nav-link-text">Cambiar foto</span>
                     </a>
                 </li>
             </h:panelGroup>
