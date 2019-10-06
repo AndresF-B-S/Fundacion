@@ -13,21 +13,6 @@
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Avatar" style="padding: 10px;">
                 <img class="img-fluid" src="#{controladorInicioSesion.obtenerRutaFoto()}" alt="Avatar" style="border-radius: 50%;" />
             </li>
-            <h:panelGroup rendered="#{not empty controladorInicioSesion.usuario}">
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="#{controladorInicioSesion.usuario.nombres} #{controladorInicioSesion.usuario.apellidos}">
-                    <a class="nav-link" href="#">
-                        <!--                        <i class="fa fa-fw fa-user-circle"></i>-->
-                        <strong><h:outputText  value="#{controladorInicioSesion.usuario.nombres.toCharArray()[0]}#{controladorInicioSesion.usuario.apellidos.toCharArray()[0]}" /></strong>
-                        <span class="nav-link-text"><h:outputText  value="#{controladorInicioSesion.usuario.nombres} #{controladorInicioSesion.usuario.apellidos}" /></span>
-                    </a>
-                </li>
-                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Nombre usuario">
-                    <a class="nav-link" href="#{request.contextPath}/app/cambiarFoto.xhtml">
-                        <i class="fa fa-fw fa-photo"></i>
-                        <span class="nav-link-text">Cambiar foto</span>
-                    </a>
-                </li>
-            </h:panelGroup>
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Usuarios">
                 <a class="nav-link" href="#{request.contextPath}/app/usuario/listaUsuario.xhtml">
                     <i class="fa fa-fw fa-user"></i>
@@ -58,9 +43,18 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-                    <i class="fa fa-fw fa-sign-out"></i>Cerrar sesion</a>
+            <li class="nav-item dropdown no-arrow">
+                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <strong><h:outputText rendered="#{not empty controladorInicioSesion.usuario}" value="#{controladorInicioSesion.usuario.nombres.toCharArray()[0]}#{controladorInicioSesion.usuario.apellidos.toCharArray()[0]} " /></strong> <h:outputText rendered="#{not empty controladorInicioSesion.usuario}" value="#{controladorInicioSesion.usuario.nombres} #{controladorInicioSesion.usuario.apellidos}" />
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                    <a class="dropdown-item" href="#{request.contextPath}/app/cambiarFoto.xhtml">
+                        <i class="fa fa-fw fa-photo"></i>Cambiar foto
+                    </a>
+                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa fa-fw fa-sign-out"></i>Cerrar sesion
+                    </a>
+                </div>
             </li>
         </ul>
     </div>
