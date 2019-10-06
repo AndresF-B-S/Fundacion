@@ -91,8 +91,9 @@ public class CorreoController {
             // este es para el interesado
             Mail.sendMail(email, asuntoAInteresado, mensajeAInteresado);
         } catch (Exception ex) {
-            //
+            ex.printStackTrace(System.err);
         }
+        
         return "";
     }
 }
