@@ -6,6 +6,7 @@
 package fundacion.modelo.dao;
 
 import fundacion.modelo.entidades.Usuario;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -30,36 +31,51 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         super(Usuario.class);
     }
     
-    public Usuario iniciarSesion(int documento, String clave){
+    public List<Usuario> findAllAdministradores() {
+        try {
+            TypedQuery<Usuario> tq = getEntityManager().createQuery("SELECT u FROM Usuario u WHERE u.idtiposUsuarios.idtiposUsuarios = 1", Usuario.class);
+
+            return tq.getResultList();
+
+        } catch (Exception e) {
+
+            e.printStackTrace();
+
+            return null;
+        }
+
+    }
+    
+    public Usuario iniciarSesion(int documento, String clave) {
         try {
             TypedQuery<Usuario> tq = getEntityManager().createQuery("SELECT u FROM Usuario u WHERE u.documento = :documento AND u.clave = :clave", Usuario.class);
             tq.setParameter("documento", documento);
             tq.setParameter("clave", clave);
-            
+
             return tq.getSingleResult();
-            
+
         } catch (Exception e) {
-            
+
             e.printStackTrace();
-            
+
             return null;
         }
-    
+
     }
-    
-        public Integer obtenerUltimoIdUsuario(){
+
+    public Integer obtenerUltimoIdUsuario() {
         try {
             TypedQuery<Integer> tq = getEntityManager().createQuery("SELECT MAX(u.idusuario) FROM Usuario u ", Integer.class);
-            
+
             return tq.getSingleResult();
-            
+
         } catch (Exception e) {
-            
+
             e.printStackTrace();
-            
+
             return null;
         }
-    
+
     }
-    
+
 }
