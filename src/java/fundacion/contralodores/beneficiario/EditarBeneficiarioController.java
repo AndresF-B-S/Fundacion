@@ -108,6 +108,9 @@ public class EditarBeneficiarioController implements Serializable {
 
     public String editar() {
         beneficiarioFacade.edit(beneficiarioSeleccionado);
+        usuarioFacade.edit(beneficiarioSeleccionado.getUsuario());
+        datoClinicoFacade.edit(beneficiarioSeleccionado.getDatosClinicosId());
+        nivelEducativoFacade.edit(beneficiarioSeleccionado.getIdnivelEducativo());
         script.setScript(MessageUtil.ShowSuccessMessage("Beneficiario editado con exito"));
         return cancelar();
     }
@@ -127,7 +130,7 @@ public class EditarBeneficiarioController implements Serializable {
         
         script.setScript(MessageUtil.ShowSuccessMessage("Foto del beneficiario editada con exito"));
 
-        return cancelar();
+        return "";
     }
 
     public Beneficiario getBeneficiarioSeleccionado() {

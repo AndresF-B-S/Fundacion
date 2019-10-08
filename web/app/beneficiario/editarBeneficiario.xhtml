@@ -35,7 +35,7 @@
 
                 <h:outputLabel value="Tipo Documento:" for="idtiposDocumento" />
                 <h:selectOneMenu class="form-control form-control-sm col-3" id="idtiposDocumento" value="#{editarBeneficiarioController.beneficiarioSeleccionado.usuario.idtiposDocumento}" title="IdtiposDocumento" converter="tipoDocumentoConverter" required="true" requiredMessage="Campo obligatorio">
-                    <f:selectItems value="#{registrarUsuarioController.listaTipoDocumento}" var="listaTipoDocumento" itemLabel="#{listaTipoDocumento.nombre}"/>
+                    <f:selectItems value="#{registrarAdministradorController.listaTipoDocumento}" var="listaTipoDocumento" itemLabel="#{listaTipoDocumento.nombre}"/>
                 </h:selectOneMenu>
 
                 <h:outputLabel value="Correo:" for="correo" />

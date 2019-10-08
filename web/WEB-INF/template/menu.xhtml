@@ -13,13 +13,7 @@
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Avatar" style="padding: 10px;">
                 <img class="img-fluid" src="#{controladorInicioSesion.obtenerRutaFoto()}" alt="Avatar" style="border-radius: 50%;" />
             </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Usuarios">
-                <a class="nav-link" href="#{request.contextPath}/app/usuario/listaUsuario.xhtml">
-                    <i class="fa fa-fw fa-user"></i>
-                    <span class="nav-link-text">Usuarios</span>
-                </a>
-            </li>
-
+            
             <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Beneficiarios">
                 <a class="nav-link" href="#{request.contextPath}/app/beneficiario/listaBeneficiarios.xhtml">
                     <i class="fa fa-fw fa-users"></i>
@@ -31,6 +25,20 @@
                 <a class="nav-link" href="#{request.contextPath}/app/vivienda/listaViviendas.xhtml">
                     <i class="fa fa-fw fa-home"></i>
                     <span class="nav-link-text">Viviendas</span>
+                </a>
+            </li>
+            
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Administradores">
+                <a class="nav-link" href="#{request.contextPath}/app/administrador/listaAdministrador.xhtml">
+                    <i class="fa fa-fw fa-user"></i>
+                    <span class="nav-link-text">Administradores</span>
+                </a>
+            </li>
+            
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tutores">
+                <a class="nav-link" href="#{request.contextPath}/app/tutor/listaTutor.xhtml">
+                    <i class="fa fa-fw fa-user"></i>
+                    <span class="nav-link-text">Tutores</span>
                 </a>
             </li>
 
