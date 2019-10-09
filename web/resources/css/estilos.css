@@ -143,7 +143,7 @@ figure{
 .contact{
     background-color: #ff4757;
     color: white;
-    padding: 10px;
+    height: 150px;
     display: flex;
     align-items: center;
     justify-content: space-between;
