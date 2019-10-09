@@ -70,7 +70,7 @@ public class Mail {
                     props.getProperty(KEY_SMTP_PASSWORD));
             transport.sendMessage(message, message.getAllRecipients());
         } catch (MessagingException me) {
-            me.printStackTrace(System.err);
+            me.printStackTrace();
         }
     }
 
