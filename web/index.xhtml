@@ -100,17 +100,18 @@
     <section class="contact">
         <div class="container">
             <h:form class="form-email" prependId="false">
-                <h3>¿Deseas apoyarnos?</h3>
-                <h:inputText a:placeholder="Tus nombres" value="#{correoController.nombres}" id="nombres"/>
-                <h:inputText  a:placeholder="Tus apellidos" value="#{correoController.apellidos}" id="apellidos"/>
-                <h:inputText a:type="email" a:placeholder="Dejanos tu email" value="#{correoController.email}" id="email"/>
-                <h:selectOneRadio id="tipoSolicitud" value="#{correoController.tipoSolicitud}">
-                    <f:selectItem itemLabel="Información" itemValue="informacion"></f:selectItem>
-                    <f:selectItem itemLabel="Donación" itemValue="donacion"></f:selectItem>
-                </h:selectOneRadio>
-                <h:inputTextarea  a:placeholder="Dejanos tu mensaje" value="#{correoController.mensaje}" id="mensaje"/> <br/> 
-                <h:commandButton value="Enviar" action="#{correoController.enviarCorreos()}" />
-            </h:form>
+				<h3>¿Deseas apoyarnos?</h3>
+				<h:inputText a:required="" a:placeholder="Tus nombres" value="#{correoController.nombres}" id="nombres" a:oninvalid="this.setCustomValidity('Por favor llena tus nombres')" a:oninput="setCustomValidity('')" />
+				<h:inputText a:required="" a:placeholder="Tus apellidos" value="#{correoController.apellidos}" id="apellidos" a:oninvalid="this.setCustomValidity('Por favor llena tus apellidos')" a:oninput="setCustomValidity('')" />
+				<h:inputText a:required="" a:type="email" a:placeholder="Dejanos tu email" value="#{correoController.email}" id="email" a:oninvalid="this.setCustomValidity('Por favor escribe tu email')" a:oninput="setCustomValidity('')" /><br />
+				<h:message for="tipoSolicitud" style="font-size: .75em" />
+				<h:selectOneRadio id="tipoSolicitud" required="true" value="#{correoController.tipoSolicitud}" requiredMessage="* Debe seleccionar información o donación">
+					<f:selectItem itemLabel="Información" itemValue="informacion"></f:selectItem>
+					<f:selectItem itemLabel="Donación" itemValue="donacion"></f:selectItem>
+				</h:selectOneRadio>
+				<h:inputTextarea a:required="" a:placeholder="Dejanos tu mensaje" value="#{correoController.mensaje}" id="mensaje" a:oninvalid="this.setCustomValidity('Por favor escribe un mensaje')" a:oninput="setCustomValidity('')"/> <br/> 
+				<h:commandButton a:type="submit" value="Enviar" action="#{correoController.enviarCorreos()}" />
+			</h:form>
             <div class="social">
                 <a href="https://twitter.com/AndresF_B_S" class="social-link twitter"></a>
                 <a href="https://facebook.com/nuevavidaaiecbogota" class="social-link facebook"></a>
