@@ -34,7 +34,7 @@
 
                 <h:outputLabel value="Tipo Documento:" for="idtiposDocumento" />
                 <h:selectOneMenu class="form-control form-control-sm col-3" id="idtiposDocumento" value="#{registroBeneficiarioController.usuario.idtiposDocumento}" title="IdtiposDocumento" converter="tipoDocumentoConverter" required="true" requiredMessage="Campo obligatorio">
-                    <f:selectItems value="#{registrarUsuarioController.listaTipoDocumento}" var="listaTipoDocumento" itemLabel="#{listaTipoDocumento.nombre}"/>
+                    <f:selectItems value="#{registrarAdministradorController.listaTipoDocumento}" var="listaTipoDocumento" itemLabel="#{listaTipoDocumento.nombre}"/>
                 </h:selectOneMenu>
 
                 <h:outputLabel value="Correo:" for="correo" />
@@ -73,7 +73,36 @@
                 <h:inputText class="form-control form-control-sm col-5" id="descripcion" value="#{registroBeneficiarioController.datoClinico.descripcion}" title="Descripcion" />
 
                 <h:outputLabel value="Nombre servicio salud (EPS):" for="nombreServicioSalud" />
-                <h:inputText class="form-control form-control-sm col-3"  id="nombreServicioSalud" value="#{registroBeneficiarioController.datoClinico.nombreServicioSalud}" title="Descripcion" />
+                <h:selectOneMenu class="form-control form-control-sm col-3"  id="nombreServicioSalud" value="#{registroBeneficiarioController.datoClinico.nombreServicioSalud}" title="Descripcion">
+                    <f:selectItem itemLabel="No tiene EPS" itemValue="No tiene EPS" />
+                    <f:selectItem itemLabel="Cafam" itemValue="Cafam" />
+                    <f:selectItem itemLabel="Cafesalud" itemValue="Cafesalud" />
+                    <f:selectItem itemLabel="Caprecom" itemValue="Caprecom" />
+                    <f:selectItem itemLabel="Colmedica" itemValue="Colmedica" />
+                    <f:selectItem itemLabel="Colsubsidio" itemValue="Colsubsidio" />
+                    <f:selectItem itemLabel="Comfenalco Valle" itemValue="Comfenalco Valle" />
+                    <f:selectItem itemLabel="Compensar" itemValue="Compensar" />
+                    <f:selectItem itemLabel="Coomeva" itemValue="Coomeva" />
+                    <f:selectItem itemLabel="Cruz Blanca" itemValue="Cruz Blanca" />
+                    <f:selectItem itemLabel="Ecoopsos" itemValue="Ecoopsos" />
+                    <f:selectItem itemLabel="EPS Sura" itemValue="EPS Sura" />
+                    <f:selectItem itemLabel="Famisanar" itemValue="Famisanar" />
+                    <f:selectItem itemLabel="Humana Vivir" itemValue="Humana Vivir" />
+                    <f:selectItem itemLabel="ISS" itemValue="ISS" />
+                    <f:selectItem itemLabel="Multimedicas" itemValue="Multimedicas" />
+                    <f:selectItem itemLabel="Mutual" itemValue="Mutual" />
+                    <f:selectItem itemLabel="Nueva EPS" itemValue="Nueva EPS" />
+                    <f:selectItem itemLabel="Red Salud" itemValue="Red Salud" />
+                    <f:selectItem itemLabel="Salud Colpatria" itemValue="Salud Colpatria" />
+                    <f:selectItem itemLabel="Salud Total" itemValue="Salud Total" />
+                    <f:selectItem itemLabel="Salud Vida" itemValue="Salud Vida" />
+                    <f:selectItem itemLabel="Salud Colombia" itemValue="Salud Colombia" />
+                    <f:selectItem itemLabel="Saludcoop" itemValue="Saludcoop" />
+                    <f:selectItem itemLabel="Sanitas" itemValue="Sanitas" />
+                    <f:selectItem itemLabel="Solsalud" itemValue="Solsalud" />
+                    <f:selectItem itemLabel="Unicajas" itemValue="Unicajas" />
+                    <f:selectItem itemLabel="Otra EPS" itemValue="Otra EPS" />
+                </h:selectOneMenu>
 
                 <h:outputLabel value="Estado:" for="estadoSalud" />
                 <h:selectOneRadio class="col-3" id="estadoSalud" value="#{registroBeneficiarioController.datoClinico.estado}">

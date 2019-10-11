@@ -5,9 +5,7 @@ import fundacion.modelo.entidades.Beneficiario;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 
 /**
@@ -28,18 +26,9 @@ public class ListaBeneficiarioController implements Serializable {
     
     public ListaBeneficiarioController() {
     }
-    
-    @PostConstruct
-    
-    public void init(){
-        
-        listaBeneficiario = beneficiarioFacade.findAll();
-        
-    }
-    
-    
 
     public List<Beneficiario> getListaBeneficiario() {
+        listaBeneficiario = beneficiarioFacade.findAll();
         return listaBeneficiario;
     }
 

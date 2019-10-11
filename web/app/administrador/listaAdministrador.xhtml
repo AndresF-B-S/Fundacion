@@ -6,10 +6,10 @@
                 xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
 
-    <ui:define name="title">Lista de usuarios</ui:define>
+    <ui:define name="title">Lista de Administradores</ui:define>
     <ui:define name="breadcrumb">
         <li class="breadcrumb-item active">
-            Lista de usuarios
+            Lista de administradores
         </li>
     </ui:define>
     <ui:define name="contenidoPrincipal">
@@ -18,11 +18,11 @@
             <h:form class="table">
                 <h1><h:outputText value="Lista de usuarios"/></h1>
                 
-                <h:commandLink title="Agregar usuario" class="btn btn-primary mb-2" action="#{listaUsuarioController.agregarUsuario()}">
-                    <span class="fa fa-plus"></span> Agregar usuario
+                <h:commandLink title="Agregar usuario" class="btn btn-primary mb-2" action="#{listaAdministradorController.agregarAdministrador()}">
+                    <span class="fa fa-plus"></span> Agregar administrador
                 </h:commandLink>
                 
-                <h:dataTable value="#{listaUsuarioController.listaUsuarios}" var="item">
+                <h:dataTable value="#{listaAdministradorController.listaAdministradores}" var="item">
                     <h:column>
                         <f:facet name="header">
                             <h:outputText value="Idusuario"/>
@@ -83,15 +83,9 @@
                     </h:column>
                     <h:column>
                         <f:facet name="header">
-                            <h:outputText value="Tipo Usuario"/>
-                        </f:facet>
-                        <h:outputText value="#{item.idtiposUsuarios.nombre}"/>
-                    </h:column>
-                    <h:column>
-                        <f:facet name="header">
                             <h:outputText value="Opciones"/>
                         </f:facet>
-                        <h:commandButton value="Editar" class="btn btn-info " action="#{editarUsuarioController.prepararEditar(item)}"/>
+                        <h:commandButton value="Editar" class="btn btn-info " action="#{editarAdministradorController.prepararEditar(item)}"/>
                     </h:column>
                     
                     
