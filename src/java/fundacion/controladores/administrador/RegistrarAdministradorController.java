@@ -17,6 +17,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -123,6 +124,11 @@ public class RegistrarAdministradorController implements Serializable {
     public void setImagenUsuario(Part imagenUsuario) {
         this.imagenUsuario = imagenUsuario;
     }
+
+    public String getVersion() {
+        return version;
+    }
+    
     
     
     
