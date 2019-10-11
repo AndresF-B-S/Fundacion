@@ -32,6 +32,9 @@ import javax.servlet.http.Part;
 @ViewScoped
 public class RegistrarUsuarioController implements Serializable {
     
+    String version = FacesContext.class.getPackage().getImplementationVersion();
+        
+    
     @EJB
     private UsuarioFacade usuarioFacade;
     
@@ -73,6 +76,14 @@ public class RegistrarUsuarioController implements Serializable {
         tutor = new Tutor();
         
     }
+    
+    public String imprimirVersion(){
+    
+    return version;
+    
+    }
+    
+    
     
     public String createUser() throws IOException{
         
@@ -131,6 +142,11 @@ public class RegistrarUsuarioController implements Serializable {
     public void setImagenUsuario(Part imagenUsuario) {
         this.imagenUsuario = imagenUsuario;
     }
+
+    public String getVersion() {
+        return version;
+    }
+    
     
     
     
