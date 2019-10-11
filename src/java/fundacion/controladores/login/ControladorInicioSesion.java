@@ -34,19 +34,24 @@ public class ControladorInicioSesion implements Serializable {
     private int documento;
 
     private String clave;
-    
+
     private Part imagenUsuario;
-    
+
     @Inject
-    
+
     private ScriptController script;
 
     public String iniciarSesion() {
         usuario = usuarioFacade.iniciarSesion(documento, clave);
 
         if (usuario != null) {
-            script.setScript(MessageUtil.ShowSuccessMessage("Bienvenido " + usuario.getNombres() + " " + usuario.getApellidos()));
-            return "/app/dashboard.xhtml?faces-redirect=true";
+            if (usuario.getIdtiposUsuarios().getIdtiposUsuarios() == 1) {
+                script.setScript(MessageUtil.ShowSuccessMessage("Bienvenido " + usuario.getNombres() + " " + usuario.getApellidos()));
+                return "/app/dashboard.xhtml?faces-redirect=true";
+            } else {
+                script.setScript(MessageUtil.ShowErrorMessage("Usuario debe ser administrador"));
+                return "";
+            }
 
         } else {
             script.setScript(MessageUtil.ShowErrorMessage("Usuario incorrecto o inexistente"));
@@ -121,12 +126,14 @@ public class ControladorInicioSesion implements Serializable {
     public void setImagenUsuario(Part imagenUsuario) {
         this.imagenUsuario = imagenUsuario;
     }
-    
+
     public String obtenerRutaFoto() {
-        if (usuario == null) usuario = new Usuario();
+        if (usuario == null) {
+            usuario = new Usuario();
+        }
         return ArchivoUtils.obtenerRutaFoto(usuario);
     }
-    
+
     public String cambiarFoto() throws IOException {
         String ruta = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/").replace("build" + File.separator, "");
         String extension = ArchivoUtils.obtenerExtensionImagen(imagenUsuario.getSubmittedFileName());
@@ -135,11 +142,11 @@ public class ControladorInicioSesion implements Serializable {
 
         usuario.setRutaFoto(nombreArchivo);
         ArchivoUtils.guardarFoto(imagenUsuario, ruta);
-        
+
         usuarioFacade.edit(usuario);
-        
+
         script.setScript(MessageUtil.ShowSuccessMessage("Foto del usuario editada con exito"));
-        
+
         return "cambiarFoto.xhtml?faces-redirect=true";
     }
 
