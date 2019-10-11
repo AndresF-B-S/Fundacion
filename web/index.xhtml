@@ -4,7 +4,7 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-    
+
 
     <head>
 
@@ -430,45 +430,61 @@
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
                         <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19. -->
-                        <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                        <h:form prependId="false" a:name="sentMessage" id="contactForm">
                             <div class="control-group">
                                 <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                                    <label>Name</label>
-                                    <input class="form-control" id="name" type="text" placeholder="Name" required="required"
-                                           data-validation-required-message="Please enter your name."/>
+                                    <h:outputLabel value="Name" for="nombres" />
+                                    <h:inputText class="form-control" id="nombres" a:type="text" a:placeholder="Nombres" a:required="required"
+                                                 a:oninvalid="this.setCustomValidity('Por favor llena tus nombres')" a:oninput="setCustomValidity('')"
+                                                 value="#{correoController.nombres}"/>
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                                    <label>Email Address</label>
-                                    <input class="form-control" id="email" type="email" placeholder="Email Address" required="required"
-                                           data-validation-required-message="Please enter your email address."/>
+                                    <h:outputLabel value="Apellidos" for="apellidos" />
+                                    <h:inputText class="form-control" id="apellidos" a:type="text" a:placeholder="Apellidos" a:required="required"
+                                                 a:oninvalid="this.setCustomValidity('Por favor llena tus apellidos')" a:oninput="setCustomValidity('')" 
+                                                 value="#{correoController.apellidos}"/>
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                                    <label>Phone Number</label>
-                                    <input class="form-control" id="phone" type="tel" placeholder="Phone Number" required="required"
-                                           data-validation-required-message="Please enter your phone number."/>
+                                    <h:outputLabel value="Correo electrónico" for="correo" />
+                                    <h:inputText class="form-control" id="correo" a:type="email" a:placeholder="Correo electrónico" a:required="required"
+                                                 a:oninvalid="this.setCustomValidity('Por favor escribe tu email')" a:oninput="setCustomValidity('')"
+                                                 value="#{correoController.email}" />
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="form-group controls mb-0 pb-2">
+                                    <h:outputLabel value="Tipo de solicitud" for="tipoSolicitud" />
+                                    <h:selectOneRadio id="tipoSolicitud" required="true" 
+                                                      requiredMessage="* Debe seleccionar información o donación" value="#{correoController.tipoSolicitud}">
+                                        <f:selectItem itemLabel="Información" itemValue="informacion" />
+                                        <f:selectItem itemLabel="Donación" itemValue="donacion" />
+                                    </h:selectOneRadio>
+                                    <h:message for="tipoSolicitud" class="help-block text-danger" />
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <div class="control-group">
                                 <div class="form-group floating-label-form-group controls mb-0 pb-2">
-                                    <label>Message</label>
-                                    <textarea class="form-control" id="message" rows="5" placeholder="Message" required="required"
-                                              data-validation-required-message="Please enter a message."></textarea>
+                                    <h:outputLabel value="Mensaje" for="mensaje" />
+                                    <h:inputTextarea class="form-control" id="mensaje" rows="5" a:placeholder="Mensaje" a:required="required"
+                                              a:oninvalid="this.setCustomValidity('Por favor escribe un mensaje')" a:oninput="setCustomValidity('')"
+                                              value="#{correoController.mensaje}"  />
                                     <p class="help-block text-danger"></p>
                                 </div>
                             </div>
                             <br/>
                             <div id="success"></div>
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary btn-xl" id="sendMessageButton">Send</button>
+                                <h:commandButton a:type="submit" class="btn btn-primary btn-xl" id="sendMessageButton" value="Enviar" action="#{correoController.enviarCorreos()}" />
                             </div>
-                        </form>
+                        </h:form>
 
                     </div>
                 </div>
@@ -730,7 +746,6 @@
 
         <!-- Contact Form JavaScript -->
         <script src="#{request.contextPath}/resources/js/jqBootstrapValidation.js"></script>
-        <script src="#{request.contextPath}/resources/js/contact_me.js"></script>
 
         <!-- Custom scripts for this template -->
         <script src="#{request.contextPath}/resources/js/freelancer.min.js"></script>
