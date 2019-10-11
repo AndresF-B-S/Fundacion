@@ -8,10 +8,7 @@ import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.view.ViewScoped;
 
-/**
- *
- * @author Andres F.B.S
- */
+
 @Named(value = "listaBeneficiarioController")
 @ViewScoped
 public class ListaBeneficiarioController implements Serializable {

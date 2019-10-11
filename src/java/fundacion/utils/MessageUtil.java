@@ -5,10 +5,7 @@
  */
 package fundacion.utils;
 
-/**
- *
- * @author Andres F.B.S
- */
+
 public class MessageUtil {
 
     public static String ShowSuccessMessage(String message) {

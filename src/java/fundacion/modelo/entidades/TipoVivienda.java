@@ -20,10 +20,7 @@ import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-/**
- *
- * @author Andres F.B.S
- */
+
 @Entity
 @Table(name = "tipo_vivienda")
 @XmlRootElement

@@ -22,10 +22,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.Conversation;
 import javax.inject.Inject;
 
-/**
- *
- * @author Andres F.B.S
- */
+
 @Named(value = "agregarViviendaController")
 @SessionScoped
 public class AgregarViviendaController implements Serializable {

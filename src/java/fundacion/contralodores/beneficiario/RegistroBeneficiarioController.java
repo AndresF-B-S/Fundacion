@@ -26,10 +26,7 @@ import javax.inject.Inject;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
 
-/**
- *
- * @author Andres F.B.S
- */
+
 @Named(value = "registroBeneficiarioController")
 @ViewScoped
 public class RegistroBeneficiarioController implements Serializable {

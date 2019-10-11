@@ -15,10 +15,7 @@ import java.util.UUID;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.Part;
 
-/**
- *
- * @author Andres F.B.S
- */
+
 public class ArchivoUtils {
 
     public static void guardarFoto(Part archivo, String ruta) throws IOException {

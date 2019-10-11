@@ -9,10 +9,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-/**
- *
- * @author David
- */
+
 @FacesConverter(value = "nivelEducativoConverter")
 public class NivelEducativoConverter implements Converter{
     

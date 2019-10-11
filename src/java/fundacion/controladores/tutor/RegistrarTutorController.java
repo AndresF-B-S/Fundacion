@@ -23,10 +23,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.servlet.http.Part;
 
-/**
- *
- * @author Andres F.B.S
- */
+
 @Named(value = "registrarTutorController")
 @ViewScoped
 public class RegistrarTutorController implements Serializable {

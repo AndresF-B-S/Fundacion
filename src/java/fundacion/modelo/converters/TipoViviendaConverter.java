@@ -11,10 +11,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-/**
- *
- * @author David
- */
+
 @FacesConverter(value = "tipoViviendaConverter")
 public class TipoViviendaConverter implements Converter{
     

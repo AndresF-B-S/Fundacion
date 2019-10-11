@@ -9,10 +9,7 @@ import java.io.Serializable;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 
-/**
- *
- * @author Andres F.B.S
- */
+
 @Named(value = "scriptController")
 @SessionScoped
 public class ScriptController implements Serializable {

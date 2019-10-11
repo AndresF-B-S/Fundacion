@@ -13,10 +13,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
-/**
- *
- * @author David
- */
+
 @FacesConverter(value = "materialViviendaConverter")
 public class MaterialViviendaConverter implements Converter{
     

@@ -10,10 +10,7 @@ import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 
-/**
- *
- * @author Andres F.B.S
- */
+
 @Named(value = "listaViviendaController")
 @ViewScoped
 public class ListaViviendaController implements Serializable{

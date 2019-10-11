@@ -9,10 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 
-/**
- *
- * @author Andres F.B.S
- */
+
 @Named(value = "listaAdministradorController")
 @SessionScoped
 public class ListaAdministradorController implements Serializable {

@@ -10,10 +10,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-/**
- *
- * @author Andres F.B.S
- */
+
 @Stateless
 public class ViviendaFacade extends AbstractFacade<Vivienda> {
 

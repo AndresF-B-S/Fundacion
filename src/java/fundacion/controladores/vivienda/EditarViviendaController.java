@@ -19,10 +19,7 @@ import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 
-/**
- *
- * @author Andres F.B.S
- */
+
 @Named(value = "editarViviendaController")
 @ConversationScoped
 public class EditarViviendaController implements Serializable {

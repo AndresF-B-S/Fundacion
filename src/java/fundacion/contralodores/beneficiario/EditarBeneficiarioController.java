@@ -26,10 +26,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.Part;
 
-/**
- *
- * @author Andres F.B.S
- */
+
 @Named(value = "editarBeneficiarioController")
 @ConversationScoped
 public class EditarBeneficiarioController implements Serializable {

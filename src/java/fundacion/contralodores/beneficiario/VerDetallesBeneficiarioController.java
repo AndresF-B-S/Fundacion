@@ -21,10 +21,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-/**
- *
- * @author Andres F.B.S
- */
+
 @Named(value = "verDetallesBeneficiarioController")
 @ConversationScoped
 public class VerDetallesBeneficiarioController implements Serializable {

@@ -8,10 +8,7 @@ package fundacion.modelo.dao;
 import java.util.List;
 import javax.persistence.EntityManager;
 
-/**
- *
- * @author Andres F.B.S
- */
+
 public abstract class AbstractFacade<T> {
 
     private Class<T> entityClass;

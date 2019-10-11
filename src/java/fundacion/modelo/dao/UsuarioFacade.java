@@ -12,10 +12,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-/**
- *
- * @author Andres F.B.S
- */
+
 @Stateless
 public class UsuarioFacade extends AbstractFacade<Usuario> {
 

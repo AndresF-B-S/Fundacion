@@ -9,10 +9,7 @@ import fundacion.utils.Mail;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 
-/**
- *
- * @author Andres F.B.S
- */
+
 @Named(value = "correoController")
 @RequestScoped
 public class CorreoController {
