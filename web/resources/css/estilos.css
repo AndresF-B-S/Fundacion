@@ -84,3 +84,12 @@ strong{
     -o-background-size: cover;
     background-size: cover;
   }
+  
+  .carousel-caption, .carousel-control-prev div, .carousel-control-next div {
+      background-color: #0008;
+  }
+  
+  .carousel-control-prev div, .carousel-control-next div {
+      border-radius: 50%;
+      padding: 25px;
+  }
