@@ -6,7 +6,6 @@ import fundacion.modelo.dao.DatoClinicoFacade;
 import fundacion.modelo.dao.UsuarioFacade;
 import fundacion.modelo.dao.ViviendaFacade;
 import fundacion.modelo.entidades.Beneficiario;
-import fundacion.modelo.entidades.Usuario;
 import fundacion.modelo.entidades.Vivienda;
 import fundacion.utils.MessageUtil;
 import javax.inject.Named;
@@ -73,7 +72,6 @@ public class EliminarBeneficiarioController implements Serializable {
         if (beneficiarioSeleccionado.getViviendaList() != null || !beneficiarioSeleccionado.getViviendaList().isEmpty()) {
             for (Vivienda v : beneficiarioSeleccionado.getViviendaList()) {
                 viviendaFacade.remove(v);
-                System.out.println("se elimino vivienda");
             }
         }
 
