@@ -92,6 +92,26 @@ public class ControladorInicioSesion implements Serializable {
         }
 
     }
+    
+    public String obtenerRutaFoto() {
+        return ArchivoUtils.obtenerRutaFoto(usuario);
+    }
+
+    public String cambiarFoto() throws IOException {
+        String ruta = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/").replace("build" + File.separator, "");
+        String extension = ArchivoUtils.obtenerExtensionImagen(imagenUsuario.getSubmittedFileName());
+        String nombreArchivo = ArchivoUtils.crearNombreDeArchivoUsuario(usuario, extension);
+        ruta = ruta + "resources" + File.separator + "images" + File.separator + "usuario" + File.separator + nombreArchivo;
+
+        usuario.setRutaFoto(nombreArchivo);
+        ArchivoUtils.guardarFoto(imagenUsuario, ruta);
+
+        usuarioFacade.edit(usuario);
+
+        script.setScript(MessageUtil.ShowSuccessMessage("Foto del usuario editada con exito"));
+
+        return "cambiarFoto.xhtml?faces-redirect=true";
+    }
 
     public Usuario getUsuario() {
         return usuario;
@@ -123,29 +143,6 @@ public class ControladorInicioSesion implements Serializable {
 
     public void setImagenUsuario(Part imagenUsuario) {
         this.imagenUsuario = imagenUsuario;
-    }
-
-    public String obtenerRutaFoto() {
-        if (usuario == null) {
-            usuario = new Usuario();
-        }
-        return ArchivoUtils.obtenerRutaFoto(usuario);
-    }
-
-    public String cambiarFoto() throws IOException {
-        String ruta = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/").replace("build" + File.separator, "");
-        String extension = ArchivoUtils.obtenerExtensionImagen(imagenUsuario.getSubmittedFileName());
-        String nombreArchivo = ArchivoUtils.crearNombreDeArchivoUsuario(usuario, extension);
-        ruta = ruta + "resources" + File.separator + "images" + File.separator + "usuario" + File.separator + nombreArchivo;
-
-        usuario.setRutaFoto(nombreArchivo);
-        ArchivoUtils.guardarFoto(imagenUsuario, ruta);
-
-        usuarioFacade.edit(usuario);
-
-        script.setScript(MessageUtil.ShowSuccessMessage("Foto del usuario editada con exito"));
-
-        return "cambiarFoto.xhtml?faces-redirect=true";
-    }
+    } 
 
 }
