@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/template/template.xhtml" 
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:define name="title">Eliminar Tutores</ui:define>
+    <ui:define name="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="listaTutor.xhtml">Lista de tutores</a>
+        </li>
+        <li class="breadcrumb-item active">
+            Eliminar Tutores
+        </li>
+    </ui:define>
+    <ui:define name="contenidoPrincipal">
+        <f:view>
+
+            <h:form>
+                <h1><h:outputText value="Eliminar Tutores"/></h1>
+                <div class="row p-3">    
+                    <h:panelGrid columns="2" class="table col-md-8">
+
+                        <h:outputLabel value="Nombres:" for="nombres" />
+                        <h:outputText class="form-control form-control-sm col-5" id="nombres" value="#{eliminarTutorController.tutorEditable.idusuario.nombres}" title="Nombres" />
+
+                        <h:outputLabel value="Apellidos:" for="apellidos" />
+                        <h:outputText class="form-control form-control-sm col-5" id="apellidos" value="#{eliminarTutorController.tutorEditable.idusuario.apellidos}" title="Apellidos" />
+
+                        <h:outputLabel value="Documento:" for="documento" />
+                        <h:outputText class="form-control form-control-sm col-5" id="documento" value="#{eliminarTutorController.tutorEditable.idusuario.documento}" title="Documento" />
+
+                        <h:outputLabel value="Tipo Documento:" for="idtiposDocumento" />
+                        <h:outputText class="form-control form-control-sm col-5" id="idtiposDocumento" value="#{eliminarTutorController.tutorEditable.idusuario.idtiposDocumento.nombre}" title="IdtiposDocumento" />
+
+                        <h:outputLabel value="Correo:" for="correo" />
+                        <h:outputText class="form-control form-control-sm col-5" id="correo" value="#{eliminarTutorController.tutorEditable.idusuario.correo}" title="Correo" />
+
+                        <h:outputLabel value="Genero:" for="genero" />
+                        <h:outputText rendered="#{eliminarTutorController.tutorEditable.idusuario.genero == 2}" class="form-control form-control-sm col-5" value="Femenino"/>
+                        <h:outputText rendered="#{eliminarTutorController.tutorEditable.idusuario.genero == 1}" class="form-control form-control-sm col-5" value="Masculino"/>
+
+                        <h:outputLabel value="Estado:" for="estado" />
+                        <h:outputText rendered="#{eliminarTutorController.tutorEditable.idusuario.estado == 0}" class="form-control form-control-sm col-5" value="Inactivo"/>
+                        <h:outputText rendered="#{eliminarTutorController.tutorEditable.idusuario.estado == 1}" class="form-control form-control-sm col-5" value="Activo"/>
+
+
+                    </h:panelGrid>
+                    <div class="col-md-4">
+                        <img src="#{eliminarTutorController.obtenerRutaFoto()}" class="img-fluid" 
+                             alt="Imagen de #{eliminarTutorController.tutorEditable.idusuario.nombres} #{eliminarTutorController.tutorEditable.idusuario.apellidos}"/>
+                    </div>
+                </div>
+                <div class="row p-3">
+                    <h:commandButton rendered="#{empty eliminarTutorController.tutorEditable.beneficiarioList}" class="btn btn-danger"  value="Eliminar" action="#{eliminarTutorController.eliminar()}"></h:commandButton>
+                    <h:panelGroup rendered="#{not empty eliminarTutorController.tutorEditable.beneficiarioList}" class="col-12" layout="block">
+                        <div class="alert alert-danger">
+                            Este tutor no puede ser eliminado porque tiene asociado a los siguientes beneficiarios:<br />
+                            <ul>
+                                <ui:repeat value="#{eliminarTutorController.tutorEditable.beneficiarioList}" var="b">
+                                    <li>#{b.usuario.nombres} #{b.usuario.apellidos}</li>
+                                </ui:repeat>
+                            </ul>
+                        </div>
+                    </h:panelGroup>
+                    <h:commandButton class="btn btn-secondary"  value="Regresar" action="#{eliminarTutorController.cancelar()}"></h:commandButton>
+                </div>
+            </h:form>
+        </f:view>
+    </ui:define>    
+</ui:composition>
+
