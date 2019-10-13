@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/WEB-INF/template/template.xhtml" 
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+    <ui:define name="title">Eliminar Administradores</ui:define>
+    <ui:define name="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="listaAdministrador.xhtml">Lista de administradores</a>
+        </li>
+        <li class="breadcrumb-item active">
+            Eliminar Administradores
+        </li>
+    </ui:define>
+    <ui:define name="contenidoPrincipal">
+        <f:view>
+
+            <h:form>
+                <h1><h:outputText value="Eliminar Administradores"/></h1>
+                <div class="row p-3">    
+                    <h:panelGrid columns="2" class="table col-md-8">
+
+                        <h:outputLabel value="Nombres:" for="nombres" />
+                        <h:outputText class="form-control form-control-sm col-5" id="nombres" value="#{eliminarAdministradorController.usuarioEditable.nombres}" title="Nombres" />
+
+                        <h:outputLabel value="Apellidos:" for="apellidos" />
+                        <h:outputText class="form-control form-control-sm col-5" id="apellidos" value="#{eliminarAdministradorController.usuarioEditable.apellidos}" title="Apellidos" />
+
+                        <h:outputLabel value="Documento:" for="documento" />
+                        <h:outputText class="form-control form-control-sm col-5" id="documento" value="#{eliminarAdministradorController.usuarioEditable.documento}" title="Documento" />
+
+                        <h:outputLabel value="Tipo Documento:" for="idtiposDocumento" />
+                        <h:outputText class="form-control form-control-sm col-5" id="idtiposDocumento" value="#{eliminarAdministradorController.usuarioEditable.idtiposDocumento.nombre}" title="IdtiposDocumento" />
+
+                        <h:outputLabel value="Correo:" for="correo" />
+                        <h:outputText class="form-control form-control-sm col-5" id="correo" value="#{eliminarAdministradorController.usuarioEditable.correo}" title="Correo" />
+
+                        <h:outputLabel value="Genero:" for="genero" />
+                        <h:outputText rendered="#{eliminarAdministradorController.usuarioEditable.genero == 2}" class="form-control form-control-sm col-5" value="Femenino"/>
+                        <h:outputText rendered="#{eliminarAdministradorController.usuarioEditable.genero == 1}" class="form-control form-control-sm col-5" value="Masculino"/>
+
+                        <h:outputLabel value="Estado:" for="estado" />
+                        <h:outputText rendered="#{eliminarAdministradorController.usuarioEditable.estado == 0}" class="form-control form-control-sm col-5" value="Inactivo"/>
+                        <h:outputText rendered="#{eliminarAdministradorController.usuarioEditable.estado == 1}" class="form-control form-control-sm col-5" value="Activo"/>
+
+
+                    </h:panelGrid>
+                    <div class="col-md-4">
+                        <img src="#{eliminarAdministradorController.obtenerRutaFoto()}" class="img-fluid" 
+                             alt="Imagen de #{eliminarAdministradorController.usuarioEditable.nombres} #{eliminarAdministradorController.usuarioEditable.apellidos}"/>
+                    </div>
+                </div>
+                <div class="row p-3">
+                    <h:commandButton class="btn btn-danger"  value="Eliminar" action="#{eliminarAdministradorController.eliminar()}"></h:commandButton>
+                    <h:commandButton class="btn btn-secondary"  value="Regresar" action="#{eliminarAdministradorController.cancelar()}"></h:commandButton>
+                </div>
+            </h:form>
+        </f:view>
+    </ui:define>    
+</ui:composition>
+

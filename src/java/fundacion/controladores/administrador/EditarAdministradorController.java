@@ -84,14 +84,14 @@ public class EditarAdministradorController implements Serializable {
     
     public String cancelar(){
         terminarConversacion();
-        return "listaAdministrador.xhtml";
+        return "listaAdministrador.xhtml?faces-redirect=true";
     
     }
     
     public String prepararEditar(Usuario usuario){
         iniciarConversacion();
         this.usuarioEditable = usuario;
-        return "editarAdministrador.xhtml";
+        return "editarAdministrador.xhtml?faces-redirect=true";
 
     }
     
