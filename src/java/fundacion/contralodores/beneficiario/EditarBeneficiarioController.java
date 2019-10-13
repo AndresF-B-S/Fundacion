@@ -107,7 +107,6 @@ public class EditarBeneficiarioController implements Serializable {
         beneficiarioFacade.edit(beneficiarioSeleccionado);
         usuarioFacade.edit(beneficiarioSeleccionado.getUsuario());
         datoClinicoFacade.edit(beneficiarioSeleccionado.getDatosClinicosId());
-        nivelEducativoFacade.edit(beneficiarioSeleccionado.getIdnivelEducativo());
         script.setScript(MessageUtil.ShowSuccessMessage("Beneficiario editado con exito"));
         return cancelar();
     }
