@@ -46,6 +46,7 @@ public class ControladorInicioSesion implements Serializable {
                 script.setScript(MessageUtil.ShowSuccessMessage("Bienvenido " + usuario.getNombres() + " " + usuario.getApellidos()));
                 return "/app/dashboard.xhtml?faces-redirect=true";
             } else {
+                usuario = null;
                 script.setScript(MessageUtil.ShowErrorMessage("Usuario debe ser administrador"));
                 return "";
             }
