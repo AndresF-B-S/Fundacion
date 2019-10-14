@@ -463,14 +463,15 @@
                             </div>
                             <div class="control-group">
                                 <div class="form-group controls mb-0 pb-2">
-                                    <h:outputLabel value="Tipo de solicitud" for="tipoSolicitud" />
-                                    <h:selectOneRadio id="tipoSolicitud" required="true" 
+                                    <h:outputLabel value="Tipo de solicitud" for="tipoSolicitud" id="labelTipoSolicitud" />
+                                    <h:selectOneRadio id="tipoSolicitud" required="true" styleClass="tipos-solicitud"
                                                       requiredMessage="* Debe seleccionar información o donación" value="#{correoController.tipoSolicitud}">
                                         <f:selectItem itemLabel="Información" itemValue="informacion" />
+                                        &nbsp;&nbsp;&nbsp;
                                         <f:selectItem itemLabel="Donación" itemValue="donacion" />
                                     </h:selectOneRadio>
                                     <h:message for="tipoSolicitud" class="help-block text-danger" />
-                                    <p class="help-block text-danger"></p>
+                                    <hr style="border: 1px solid #e9ecef;" />
                                 </div>
                             </div>
                             <div class="control-group">

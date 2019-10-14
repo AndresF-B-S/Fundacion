@@ -93,3 +93,22 @@ strong{
       border-radius: 50%;
       padding: 25px;
   }
+  
+  #labelTipoSolicitud {
+      font-size: 1.5em;
+      color: #6c7781;
+      margin-top: 15px;
+  }
+  
+  .tipos-solicitud {
+      color: #6c7781;
+      font-size: 1.25em;
+  }
+  
+  #tipoSolicitud tbody tr input {
+      margin-right: 5px;
+  }
+  
+  #tipoSolicitud tbody tr label {
+      margin-right: 10px;
+  }
