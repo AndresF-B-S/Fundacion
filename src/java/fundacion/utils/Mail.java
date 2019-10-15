@@ -20,10 +20,7 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-/**
- *
- * @author davrivas
- */
+
 public class Mail {
 
     private final static String KEY_SMTP_SERVER = "mail.smtp.host";
